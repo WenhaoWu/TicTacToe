@@ -6,5 +6,5 @@ Simple implementation of tictactoe using android studio.
 
 ![](https://github.com/WenhaoWu/TicTacToe/blob/master/DemoPic/DemoPic1.png)
 
-![](https://github.com/WenhaoWu/TicTacToe/blob/master/DemoPic/DemoPic1.png)
+![](https://github.com/WenhaoWu/TicTacToe/blob/master/DemoPic/DemoPic2.png)
 
