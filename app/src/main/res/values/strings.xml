@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TicTacToe</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">TicTacToe_1</string>
     <string name="action_settings">Settings</string>
-    <string name="Turn">X turn</string>
+    <string name="TitleText">TicTacToe</string>
+    <string name="DialogTitle">We have a winner</string>
+    <string name="ok">Do it again</string>
+    <string name="exit">Exit</string>
 
 </resources>

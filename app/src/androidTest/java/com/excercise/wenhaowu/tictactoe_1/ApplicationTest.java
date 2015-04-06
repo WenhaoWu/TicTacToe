@@ -1,4 +1,4 @@
-package com.example.wenhaowu.tictactoe;
+package com.excercise.wenhaowu.tictactoe_1;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

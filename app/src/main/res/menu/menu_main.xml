@@ -1,6 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/displayNum" android:title="Display Number"
+        android:orderInCategory="200" app:showAsAction="never"/>
+
+    <item android:id="@+id/displayX" android:orderInCategory="300"
+        android:title="Display X/O" app:showAsAction="never"/>
+
 </menu>
