@@ -3,6 +3,7 @@ package com.excercise.wenhaowu.tictactoe_1;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,13 +21,19 @@ public class MainActivity extends ActionBarActivity {
     private boolean ticTurn = false;
     private char board[][] = new char[3][3];
     private int numflag =0 ;
+    private int musicFlag = 0;
+    public static char[][] gameStatu = new char[3][3];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //load onclickListeners method for every button
         setupOnClickListeners();
-        resetButtons();
+        newGame();
+
         Button b =(Button)findViewById(R.id.newGameBtn);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +42,44 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        newGame();
+        //Deal with the music button
+        final Intent svc = new Intent(this, Bgm_Service.class);
+
+        Button m = (Button)findViewById(R.id.musicBtn);
+        m.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (musicFlag == 0) {
+                    startService(svc);
+                    musicFlag = 1;
+                } else {
+                    stopService(svc);
+                    musicFlag = 0;
+                }
+            }
+        });
+
+        //Deal with the save game button
+        Button saveGame = (Button)findViewById(R.id.saveBtn);
+        saveGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyFileHanlder.saveToFile(getApplicationContext());
+            }
+        });
+
+        //Deal with the load game button
+        Button loadGame = (Button)findViewById(R.id.loadBtn);
+        loadGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String test = MyFileHanlder.readFromFile(getApplicationContext());
+            }
+        });
+    }
+
+    public static char[][] getGameStatu(){
+        return gameStatu;
     }
 
     public void newGame(){
@@ -43,6 +87,12 @@ public class MainActivity extends ActionBarActivity {
         board = new char[3][3];
         Log.e("MyTag","Here");
         resetButtons();
+        //for saving game purpose, '0'=unclicked; '1'=o; '2'=x
+        for (int i=0; i<3; i++){
+            for (int j=0; j<3; j++){
+                gameStatu[i][j]='0';
+            }
+        }
     }
 
     private void resetButtons(){
@@ -94,19 +144,25 @@ public class MainActivity extends ActionBarActivity {
             if (v instanceof Button){
                 Button B = (Button) v;
                 board[x][y] = ticTurn ? 'O' : 'X';
+                gameStatu[x][y]= ticTurn ? '1' :'2' ;
                 if (numflag == 0){
                     B.setText(ticTurn ? "O" : "X");
+                    B.setTextColor(Color.RED);
                 }
                 else if (numflag ==1){
                     B.setText(ticTurn? "2":"1");
                 }
                 B.setEnabled(false);
+
+                //change to other player's turn
                 ticTurn = !ticTurn;
+
                 if (checkWin()){
                     disableButtons();
                 }
             }
         }
+
     }
 
     private void disableButtons(){
@@ -246,6 +302,7 @@ public class MainActivity extends ActionBarActivity {
         alert.show();
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

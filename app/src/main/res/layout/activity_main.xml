@@ -5,14 +5,14 @@
                 android:layout_height="fill_parent"
                 android:weightSum="3">
 
-   <TextView
+    <TextView
        android:layout_width="wrap_content"
        android:layout_height="0dp"
        android:text="@string/TitleText"
        android:textStyle="italic"
        android:textSize="56dp"
        android:layout_marginTop="20dp"
-       android:layout_weight="0.5"/>
+       android:layout_weight="0.75"/>
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:id="@+id/tableLayout"
-        android:layout_weight="2"
+        android:layout_weight="2.5"
         android:weightSum="3">
 
         <TableRow
@@ -113,20 +113,58 @@
                 android:layout_column="3"
                 android:width="100dp"
                 android:height="100dp"/>/>
-
         </TableRow>
 
 
         </TableLayout>
 
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="New Game"
-        android:id="@+id/newGameBtn"
-        android:layout_gravity="center_horizontal"
+    <LinearLayout
         android:layout_marginTop="50dp"
-        android:layout_weight="0.5"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:weightSum="4"
+        android:orientation="horizontal"
+        android:layout_weight="0.5"
+        android:layout_gravity="center">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Game"
+            android:id="@+id/newGameBtn"
+            android:layout_gravity="left"
+            android:layout_marginTop="50dp"
+            android:layout_weight="0.8"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Music"
+            android:id="@+id/musicBtn"
+            android:layout_gravity="right"
+            android:layout_marginTop="50dp"
+            android:layout_weight="0.8"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/saveBtn"
+            android:layout_gravity="left"
+            android:layout_marginTop="50dp"
+            android:layout_weight="0.8"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Load"
+            android:id="@+id/loadBtn"
+            android:layout_gravity="left"
+            android:layout_marginTop="50dp"
+            android:layout_weight="0.8"/>
+
+
+
+    </LinearLayout>
 
 </LinearLayout>
