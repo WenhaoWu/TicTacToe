@@ -74,8 +74,131 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 String test = MyFileHanlder.readFromFile(getApplicationContext());
+                newGame();
+
+                //converting one dimension array to two dimension array and make the button like it s been clicked
+                //stupid way find a elegent way later
+                for (int i=0; i<test.length();i++){
+                    char temp = test.charAt(i);
+                    Button B;
+                    //make the button display 'o'
+                    if (temp == '1'){
+                        switch (i){
+                            case 0:
+                                board[0][0] = 'O';
+                                B = (Button)findViewById(R.id.Btn11);
+                                break;
+                            case 1:
+                                board[0][1] = 'O';
+                                B = (Button)findViewById(R.id.Btn21);
+                                break;
+                            case 2:
+                                board[0][2] = 'O';
+                                B = (Button)findViewById(R.id.Btn31);
+                                break;
+                            case 3:
+                                board[1][0] = 'O';
+                                B = (Button)findViewById(R.id.Btn12);
+                                break;
+                            case 4:
+                                board[1][1] = 'O';
+                                B = (Button)findViewById(R.id.Btn22);
+                                break;
+                            case 5:
+                                board[1][2] = 'O';
+                                B = (Button)findViewById(R.id.Btn32);
+                                break;
+                            case 6:
+                                board[2][0] = 'O';
+                                B = (Button)findViewById(R.id.Btn13);
+                                break;
+                            case 7:
+                                board[2][1] = 'O';
+                                B = (Button)findViewById(R.id.Btn23);
+                                break;
+                            case 8:
+                                board[2][2] = 'O';
+                                B = (Button)findViewById(R.id.Btn33);
+                                break;
+                            //no sepecial meaning, just for giving the default value for B
+                            default:
+                                B= (Button)findViewById(R.id.Btn33);
+                                break;
+                        }
+                        btnSetText_fixed(B, true);
+                        ticTurn = false;
+                    }
+                    else if (temp == '2'){
+                        switch (i){
+                            case 0:
+                                board[0][0] = 'X';
+                                B = (Button)findViewById(R.id.Btn11);
+                                break;
+                            case 1:
+                                board[0][1] = 'X';
+                                B = (Button)findViewById(R.id.Btn21);
+                                break;
+                            case 2:
+                                board[0][2] = 'X';
+                                B = (Button)findViewById(R.id.Btn31);
+                                break;
+                            case 3:
+                                board[1][0] = 'X';
+                                B = (Button)findViewById(R.id.Btn12);
+                                break;
+                            case 4:
+                                board[1][1] = 'X';
+                                B = (Button)findViewById(R.id.Btn22);
+                                break;
+                            case 5:
+                                board[1][2] = 'X';
+                                B = (Button)findViewById(R.id.Btn32);
+                                break;
+                            case 6:
+                                board[2][0] = 'X';
+                                B = (Button)findViewById(R.id.Btn13);
+                                break;
+                            case 7:
+                                board[2][1] = 'X';
+                                B = (Button)findViewById(R.id.Btn23);
+                                break;
+                            case 8:
+                                board[2][2] = 'X';
+                                B = (Button)findViewById(R.id.Btn33);
+                                break;
+                            //no sepecial meaning, just for giving the default value for B
+                            default:
+                                B= (Button)findViewById(R.id.Btn33);
+                                break;
+                        }
+                        btnSetText_fixed(B, false);
+                        ticTurn = true;
+                    }
+                }
             }
         });
+    }
+
+    private void btnSetText_fixed(Button B, Boolean circle){
+        if (circle == true){
+            if (numflag == 0){
+                B.setText("O");
+                B.setTextColor(Color.RED);
+            }
+            else if (numflag ==1){
+                B.setText("1");
+            }
+        }
+        else{
+            if (numflag == 0){
+                B.setText("X");
+                B.setTextColor(Color.RED);
+            }
+            else if (numflag ==1){
+                B.setText("2");
+            }
+        }
+        B.setEnabled(false);
     }
 
     public static char[][] getGameStatu(){
@@ -145,14 +268,9 @@ public class MainActivity extends ActionBarActivity {
                 Button B = (Button) v;
                 board[x][y] = ticTurn ? 'O' : 'X';
                 gameStatu[x][y]= ticTurn ? '1' :'2' ;
-                if (numflag == 0){
-                    B.setText(ticTurn ? "O" : "X");
-                    B.setTextColor(Color.RED);
-                }
-                else if (numflag ==1){
-                    B.setText(ticTurn? "2":"1");
-                }
-                B.setEnabled(false);
+
+                //set the text appear on the button depends on the numFlag
+                buttonSetText(B);
 
                 //change to other player's turn
                 ticTurn = !ticTurn;
@@ -163,6 +281,17 @@ public class MainActivity extends ActionBarActivity {
             }
         }
 
+    }
+
+    private void buttonSetText(Button B){
+        if (numflag == 0){
+            B.setText(ticTurn ? "O" : "X");
+            B.setTextColor(Color.RED);
+        }
+        else if (numflag ==1){
+            B.setText(ticTurn? "2":"1");
+        }
+        B.setEnabled(false);
     }
 
     private void disableButtons(){
