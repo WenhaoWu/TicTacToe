@@ -2,7 +2,8 @@
 Simple implementation of tictactoe using android studio.
 
 # Feature
-
+* Using service to play background music.
+* Game state is saved to file. 
 
 #Demo
 
