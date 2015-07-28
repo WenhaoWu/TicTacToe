@@ -23,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
     private int numflag =0 ;
     private int musicFlag = 0;
     public static char[][] gameStatu = new char[3][3];
-
+    private Button saveGame, loadGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,8 @@ public class MainActivity extends ActionBarActivity {
         });
 
         //Deal with the music button
-        final Intent svc = new Intent(this, Bgm_Service.class);
 
+        final Intent svc = new Intent(this, Bgm_Service.class);
         Button m = (Button)findViewById(R.id.musicBtn);
         m.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
         });
 
         //Deal with the save game button
-        Button saveGame = (Button)findViewById(R.id.saveBtn);
+        saveGame = (Button)findViewById(R.id.saveBtn);
         saveGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,114 +69,117 @@ public class MainActivity extends ActionBarActivity {
         });
 
         //Deal with the load game button
-        Button loadGame = (Button)findViewById(R.id.loadBtn);
+        loadGame = (Button)findViewById(R.id.loadBtn);
         loadGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String test = MyFileHanlder.readFromFile(getApplicationContext());
                 newGame();
-
-                //converting one dimension array to two dimension array and make the button like it s been clicked
-                //stupid way find a elegent way later
-                for (int i=0; i<test.length();i++){
-                    char temp = test.charAt(i);
-                    Button B;
-                    //make the button display 'o'
-                    if (temp == '1'){
-                        switch (i){
-                            case 0:
-                                board[0][0] = 'O';
-                                B = (Button)findViewById(R.id.Btn11);
-                                break;
-                            case 1:
-                                board[0][1] = 'O';
-                                B = (Button)findViewById(R.id.Btn21);
-                                break;
-                            case 2:
-                                board[0][2] = 'O';
-                                B = (Button)findViewById(R.id.Btn31);
-                                break;
-                            case 3:
-                                board[1][0] = 'O';
-                                B = (Button)findViewById(R.id.Btn12);
-                                break;
-                            case 4:
-                                board[1][1] = 'O';
-                                B = (Button)findViewById(R.id.Btn22);
-                                break;
-                            case 5:
-                                board[1][2] = 'O';
-                                B = (Button)findViewById(R.id.Btn32);
-                                break;
-                            case 6:
-                                board[2][0] = 'O';
-                                B = (Button)findViewById(R.id.Btn13);
-                                break;
-                            case 7:
-                                board[2][1] = 'O';
-                                B = (Button)findViewById(R.id.Btn23);
-                                break;
-                            case 8:
-                                board[2][2] = 'O';
-                                B = (Button)findViewById(R.id.Btn33);
-                                break;
-                            //no sepecial meaning, just for giving the default value for B
-                            default:
-                                B= (Button)findViewById(R.id.Btn33);
-                                break;
-                        }
-                        btnSetText_fixed(B, true);
-                        ticTurn = false;
-                    }
-                    else if (temp == '2'){
-                        switch (i){
-                            case 0:
-                                board[0][0] = 'X';
-                                B = (Button)findViewById(R.id.Btn11);
-                                break;
-                            case 1:
-                                board[0][1] = 'X';
-                                B = (Button)findViewById(R.id.Btn21);
-                                break;
-                            case 2:
-                                board[0][2] = 'X';
-                                B = (Button)findViewById(R.id.Btn31);
-                                break;
-                            case 3:
-                                board[1][0] = 'X';
-                                B = (Button)findViewById(R.id.Btn12);
-                                break;
-                            case 4:
-                                board[1][1] = 'X';
-                                B = (Button)findViewById(R.id.Btn22);
-                                break;
-                            case 5:
-                                board[1][2] = 'X';
-                                B = (Button)findViewById(R.id.Btn32);
-                                break;
-                            case 6:
-                                board[2][0] = 'X';
-                                B = (Button)findViewById(R.id.Btn13);
-                                break;
-                            case 7:
-                                board[2][1] = 'X';
-                                B = (Button)findViewById(R.id.Btn23);
-                                break;
-                            case 8:
-                                board[2][2] = 'X';
-                                B = (Button)findViewById(R.id.Btn33);
-                                break;
-                            //no sepecial meaning, just for giving the default value for B
-                            default:
-                                B= (Button)findViewById(R.id.Btn33);
-                                break;
-                        }
-                        btnSetText_fixed(B, false);
-                        ticTurn = true;
-                    }
-                }
+                convertToBoard(test);
             }
         });
+    }
+
+    private void convertToBoard(String test){
+        //converting one dimension array to two dimension array and make the button like it s been clicked
+        //stupid way find an elegant way later
+        for (int i=0; i<test.length();i++){
+            char temp = test.charAt(i);
+            Button B;
+            //make the button display 'o'
+            if (temp == '1'){
+                switch (i){
+                    case 0:
+                        board[0][0] = 'O';
+                        B = (Button)findViewById(R.id.Btn11);
+                        break;
+                    case 1:
+                        board[0][1] = 'O';
+                        B = (Button)findViewById(R.id.Btn21);
+                        break;
+                    case 2:
+                        board[0][2] = 'O';
+                        B = (Button)findViewById(R.id.Btn31);
+                        break;
+                    case 3:
+                        board[1][0] = 'O';
+                        B = (Button)findViewById(R.id.Btn12);
+                        break;
+                    case 4:
+                        board[1][1] = 'O';
+                        B = (Button)findViewById(R.id.Btn22);
+                        break;
+                    case 5:
+                        board[1][2] = 'O';
+                        B = (Button)findViewById(R.id.Btn32);
+                        break;
+                    case 6:
+                        board[2][0] = 'O';
+                        B = (Button)findViewById(R.id.Btn13);
+                        break;
+                    case 7:
+                        board[2][1] = 'O';
+                        B = (Button)findViewById(R.id.Btn23);
+                        break;
+                    case 8:
+                        board[2][2] = 'O';
+                        B = (Button)findViewById(R.id.Btn33);
+                        break;
+                    //no sepecial meaning, just for giving the default value for B
+                    default:
+                        B= (Button)findViewById(R.id.Btn33);
+                        break;
+                }
+                btnSetText_fixed(B, true);
+                ticTurn = false;
+            }
+            else if (temp == '2'){
+                switch (i){
+                    case 0:
+                        board[0][0] = 'X';
+                        B = (Button)findViewById(R.id.Btn11);
+                        break;
+                    case 1:
+                        board[0][1] = 'X';
+                        B = (Button)findViewById(R.id.Btn21);
+                        break;
+                    case 2:
+                        board[0][2] = 'X';
+                        B = (Button)findViewById(R.id.Btn31);
+                        break;
+                    case 3:
+                        board[1][0] = 'X';
+                        B = (Button)findViewById(R.id.Btn12);
+                        break;
+                    case 4:
+                        board[1][1] = 'X';
+                        B = (Button)findViewById(R.id.Btn22);
+                        break;
+                    case 5:
+                        board[1][2] = 'X';
+                        B = (Button)findViewById(R.id.Btn32);
+                        break;
+                    case 6:
+                        board[2][0] = 'X';
+                        B = (Button)findViewById(R.id.Btn13);
+                        break;
+                    case 7:
+                        board[2][1] = 'X';
+                        B = (Button)findViewById(R.id.Btn23);
+                        break;
+                    case 8:
+                        board[2][2] = 'X';
+                        B = (Button)findViewById(R.id.Btn33);
+                        break;
+                    //no sepecial meaning, just for giving the default value for B
+                    default:
+                        B= (Button)findViewById(R.id.Btn33);
+                        break;
+                }
+                btnSetText_fixed(B, false);
+                ticTurn = true;
+            }
+        }
     }
 
     private void btnSetText_fixed(Button B, Boolean circle){
@@ -432,6 +435,25 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        final Intent svc = new Intent(this, Bgm_Service.class);
+        if (musicFlag == 1){
+            stopService(svc);
+        }
+        saveGame.performClick();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final Intent svc = new Intent(this, Bgm_Service.class);
+        if (musicFlag == 1){
+            startService(svc);
+        }
+        loadGame.performClick();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
